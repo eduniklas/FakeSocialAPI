@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using FakeSocialAPI.Models;
 
-namespace FakeSocialAPI.IRepository
+namespace FakeSocialAPI.IRepositories
 {
     public interface IPostRepository
     {

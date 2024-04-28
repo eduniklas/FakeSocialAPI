@@ -13,5 +13,6 @@ namespace FakeSocialAPI.Models
         public string Password { get; set; } // Hash?
         public DateTime Creation_Date { get; set; }
         public DateTime Last_Login { get; set; }
+        public virtual ICollection<Friend> Friends { get; set; } // need config relationship to work properly
     }
 }

@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "f11MiK/Z+SWexXGutvQofGH6l2EDLax2GfCsVfpyjGRrJuvwzbqJvgF/XDjb8BuCjlY15ssFbWdCBETPZ68gzw==",
+  "dgSpecHash": "KSEsgcU95XM36uFd63kz0zW3wALXj4ag6GfkUUdcz+APdiPGfL8F+ZcAIl9WyDvw4x0VMVXnEX7EXRf3LG1dHg==",
   "success": true,
   "projectFilePath": "C:\\Users\\nikke\\Dokument\\Code\\ThisApi\\FakeSocialAPI\\FakeSocialAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nikke\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\nikke\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\nikke\\.nuget\\packages\\fluentvalidation\\11.9.1\\fluentvalidation.11.9.1.nupkg.sha512",
+    "C:\\Users\\nikke\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\nikke\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\nikke\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\nikke\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.1\\microsoft.aspnetcore.openapi.8.0.1.nupkg.sha512",
     "C:\\Users\\nikke\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

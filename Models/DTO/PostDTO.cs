@@ -1,12 +1,10 @@
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FakeSocialAPI.Models
+namespace FakeSocialAPI.Models.DTO
 {
-    public class Post
+    public class PostDTO
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        // can modify
         public int Post_ID { get; set; } // PK
         [ForeignKey("User")]
         public int User_ID { get; set; } // FK

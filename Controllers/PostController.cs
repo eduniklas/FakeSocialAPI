@@ -1,6 +1,4 @@
-// Controller for content data
-
-using FakeSocialAPI.IRepository;
+using FakeSocialAPI.IRepositories;
 using FakeSocialAPI.Models;
 using FakeSocialAPI.ResponseExtention;
 using Microsoft.AspNetCore.Mvc;

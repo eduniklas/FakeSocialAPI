@@ -1,10 +1,10 @@
 using System.Linq.Expressions;
 using FakeSocialAPI.Data;
-using FakeSocialAPI.IRepository;
+using FakeSocialAPI.IRepositories;
 using FakeSocialAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FakeSocialAPI.Repository
+namespace FakeSocialAPI.Repositories
 {
     public class CommentRepository : ICommentRepository
     {
@@ -15,15 +15,17 @@ namespace FakeSocialAPI.Repository
         }
         public async Task<List<Comment>> GetCommentList(Expression<Func<Comment, bool>> filter = null)
         {
-            IQueryable<Comment> comments = _dbContext.Comments;
+            IQueryable<Comment> comments = _dbContext.Comments.Include(u => u.User).Include(p => p.Post);
             if (filter != null)
             {
                 comments = comments.Where(filter);
             }
             return await comments.Select(c => new Comment{
                 Comment_ID = c.Comment_ID,
-                Post_ID = c.Post_ID, // Select to get post data
-                User_ID = c.User_ID, // Select to get user data
+                Post_ID = c.Post_ID,
+                Post = c.Post,
+                User_ID = c.User_ID,
+                User = c.User,
                 Comment_Text = c.Comment_Text,
                 Commented_On = c.Commented_On
             }).ToListAsync();
@@ -31,7 +33,7 @@ namespace FakeSocialAPI.Repository
 
         public async Task<Comment> GetCommentByFilter(Expression<Func<Comment, bool>> filter = null, bool tracked = true)
         {
-            IQueryable<Comment> comment = _dbContext.Comments;
+            IQueryable<Comment> comment = _dbContext.Comments.Include(u => u.User).Include(p => p.Post.User);
             if (!tracked == true)
             {
                 comment = comment.AsNoTracking();
@@ -43,8 +45,10 @@ namespace FakeSocialAPI.Repository
             return await comment.Select(c => new Comment
             {
                 Comment_ID = c.Comment_ID,
-                Post_ID = c.Post_ID, // Select to get post data
-                User_ID = c.User_ID, // Select to get user data
+                Post_ID = c.Post_ID,
+                Post = c.Post,
+                User_ID = c.User_ID,
+                User = c.User,
                 Comment_Text = c.Comment_Text,
                 Commented_On = c.Commented_On
             }).FirstOrDefaultAsync();

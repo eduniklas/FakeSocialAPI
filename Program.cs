@@ -1,8 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using FakeSocialAPI.Data;
 using FakeSocialAPI.Exception;
-using FakeSocialAPI.IRepository;
-using FakeSocialAPI.Repository;
+using FakeSocialAPI.IRepositories;
+using FakeSocialAPI.Repositories;
+using FluentValidation.AspNetCore;
+using FakeSocialAPI.Models;
+using FakeSocialAPI.Validators;
+using System.Reflection;
+using FluentValidation;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +22,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     throw new InvalidOperationException("Connection string 'DefaultConnection' not found")
 ));
 
+builder.Services.AddValidatorsFromAssemblyContaining<UserValidator>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();

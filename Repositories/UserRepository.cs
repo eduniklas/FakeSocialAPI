@@ -1,10 +1,10 @@
 using System.Linq.Expressions;
 using FakeSocialAPI.Data;
-using FakeSocialAPI.IRepository;
+using FakeSocialAPI.IRepositories;
 using FakeSocialAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FakeSocialAPI.Repository
+namespace FakeSocialAPI.Repositories
 {
     public class UserRepository : IUserRepository
     {
@@ -26,7 +26,15 @@ namespace FakeSocialAPI.Repository
                 EmailAddress = u.EmailAddress,
                 Password = u.Password,
                 Creation_Date = u.Creation_Date,
-                Last_Login = u.Last_Login
+                Last_Login = u.Last_Login,
+                Friends = u.Friends.Select(f => new Friend  // need config relationship to work properly
+                {
+                    Friend_ID = f.Friend_ID,
+                    User1_ID = f.User1_ID,
+                    User2_ID = f.User2_ID,
+                    Status = f.Status,
+                    Since_Date = f.Since_Date
+                }).ToList(),
             }).ToListAsync();
         }
 
@@ -48,8 +56,26 @@ namespace FakeSocialAPI.Repository
                 EmailAddress = u.EmailAddress,
                 Password = u.Password,
                 Creation_Date = u.Creation_Date,
-                Last_Login = u.Last_Login
+                Last_Login = u.Last_Login,
+                Friends = u.Friends.Select(f => new Friend  // need config relationship to work properly
+                {
+                    Friend_ID = f.Friend_ID,
+                    User1_ID = f.User1_ID,
+                    User1 = f.User1,
+                    User2_ID = f.User2_ID,
+                    // User2 = f.User2, 
+                    Status = f.Status,
+                    Since_Date = f.Since_Date
+                }).ToList(),
             }).FirstOrDefaultAsync();
+        }
+
+        public async Task<Users> CreateUser(Users newUser)
+        {
+            var result = await _dbContext.Users.AddAsync(newUser);
+            await _dbContext.SaveChangesAsync();
+            Console.WriteLine(result + " - Saving data");
+            return newUser;
         }
     }
 }
