@@ -24,5 +24,20 @@ namespace FakeSocialAPI.Controllers
         {   
             return CreateResponseExtention.CreateResponse(await _postRepository.GetPostByFilter(x => x.Post_ID == post_id));
         }
+        [HttpPost("CreateNewPost")]
+        public async Task<ActionResult<ApiResponse>> CreateNewPost([FromBody] Post newPost)
+        {
+            return CreateResponseExtention.CreateResponse(await _postRepository.CreatePost(newPost));
+        }
+        [HttpPatch("UpdatePost")]
+        public async Task<ActionResult<ApiResponse>> UpdatePost([FromBody] Post updatePost) // change to DTO ?
+        {
+            return CreateResponseExtention.CreateResponse(await _postRepository.UpdatePost(updatePost));
+        }
+        [HttpDelete("DeletePost")]
+        public async Task<ActionResult<ApiResponse>> DeletePost([FromBody] Post newPost) // change to DTO ?
+        {
+            return CreateResponseExtention.CreateResponse(await _postRepository.DeletePost(newPost));
+        }
     }
 }

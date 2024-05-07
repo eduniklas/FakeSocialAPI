@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using FakeSocialAPI.Data;
 using FakeSocialAPI.IRepositories;
 using FakeSocialAPI.Models;
+using FakeSocialAPI.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 
 namespace FakeSocialAPI.Repositories
@@ -61,7 +62,7 @@ namespace FakeSocialAPI.Repositories
                 {
                     Friend_ID = f.Friend_ID,
                     User1_ID = f.User1_ID,
-                    User1 = f.User1,
+                    // User1 = f.User1,
                     User2_ID = f.User2_ID,
                     // User2 = f.User2, 
                     Status = f.Status,
@@ -74,8 +75,21 @@ namespace FakeSocialAPI.Repositories
         {
             var result = await _dbContext.Users.AddAsync(newUser);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine(result + " - Saving data");
-            return newUser;
+            return result.Entity;
+        }
+        public async Task<Users> DeleteUser(Users deleteUser)
+        {
+            var result = _dbContext.Users.Remove(deleteUser);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
+        }
+        public async Task<Users> UpdateUser(UsersDTO updateUser)
+        {
+            // use mapper to change to Users
+            Users u = new();
+            var result = _dbContext.Users.Update(u);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
         }
     }
 }

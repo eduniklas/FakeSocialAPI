@@ -24,5 +24,20 @@ namespace FakeSocialAPI.Controllers
         {   
             return CreateResponseExtention.CreateResponse(await _commentRepository.GetCommentByFilter(x => x.Comment_ID == comment_id));
         }
+        [HttpPost("CreateNewComment")]
+        public async Task<ActionResult<ApiResponse>> AddNewComment([FromBody] Comment newComment)
+        {
+            return CreateResponseExtention.CreateResponse(await _commentRepository.AddNewComment(newComment));
+        }
+        [HttpPatch("EditComment")]
+        public async Task<ActionResult<ApiResponse>> UpdateComment([FromBody] Comment updateComment)
+        {
+            return CreateResponseExtention.CreateResponse(await _commentRepository.UpdateComment(updateComment));
+        }
+        [HttpDelete("DeleteComment")]
+        public async Task<ActionResult<ApiResponse>> DeleteComment([FromBody] Comment deleteComment)
+        {
+            return CreateResponseExtention.CreateResponse(await _commentRepository.DeleteComment(deleteComment));
+        }
     }
 }

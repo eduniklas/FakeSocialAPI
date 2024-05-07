@@ -27,7 +27,15 @@ namespace FakeSocialAPI.Repositories
                 Content = p.Content,
                 Image_URL = p.Image_URL,
                 Posted_On = p.Posted_On,
-                Visibility = p.Visibility
+                Visibility = p.Visibility,
+                Likes = p.Likes.Select(l => new Like
+                {
+                    Like_ID = l.Like_ID,
+                    Liked_On = l.Liked_On,
+                    Post_ID = l.Post_ID,
+                    User_ID = l.User_ID,
+                    User = l.User
+                }).ToList(),
             }).ToListAsync();
         }
 
@@ -60,6 +68,25 @@ namespace FakeSocialAPI.Repositories
                     User = l.User
                 }).ToList(),
             }).FirstOrDefaultAsync();
+        }
+
+        public async Task<Post> CreatePost(Post newPost)
+        {
+            var result = await _dbContext.Posts.AddAsync(newPost);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
+        }
+        public async Task<Post> DeletePost(Post deletePost)
+        {
+            var result = _dbContext.Posts.Remove(deletePost);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
+        }
+        public async Task<Post> UpdatePost(Post updateUser)
+        {
+            var result = _dbContext.Posts.Update(updateUser);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
         }
     }
 }

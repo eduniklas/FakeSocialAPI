@@ -1,6 +1,7 @@
 using FakeSocialAPI.Data;
 using FakeSocialAPI.IRepositories;
 using FakeSocialAPI.Models;
+using FakeSocialAPI.Models.DTO;
 using FakeSocialAPI.ResponseExtention;
 using FluentValidation;
 using FluentValidation.Results;
@@ -31,7 +32,7 @@ namespace FakeSocialAPI.Controllers
         }
         
         [HttpPost("CreateNewUser")]
-        public async Task<ActionResult<ApiResponse>> CreateNewUser(Users newUser) // change to userDTO ?
+        public async Task<ActionResult<ApiResponse>> CreateNewUser([FromBody] Users newUser) // change to userDTO ?
         {
             ValidationResult response = await _validator.ValidateAsync(newUser);
             if(!response.IsValid)
@@ -39,6 +40,16 @@ namespace FakeSocialAPI.Controllers
                 return BadRequest(response.Errors);
             }
             return CreateResponseExtention.CreateResponse(await _userRepository.CreateUser(newUser));
+        }
+        [HttpPatch("UpdateUser")]
+        public async Task<ActionResult<ApiResponse>> UpdateUser([FromBody] UsersDTO updateUser)
+        {
+            return CreateResponseExtention.CreateResponse(await _userRepository.UpdateUser(updateUser));
+        }
+        [HttpDelete("DeleteUser")]
+        public async Task<ActionResult<ApiResponse>> DeleteUser([FromBody] Users user) // change to DTO ?
+        {
+            return CreateResponseExtention.CreateResponse(await _userRepository.DeleteUser(user));
         }
     }
 }

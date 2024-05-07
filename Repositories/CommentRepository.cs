@@ -53,5 +53,26 @@ namespace FakeSocialAPI.Repositories
                 Commented_On = c.Commented_On
             }).FirstOrDefaultAsync();
         }
+
+        public async Task<Comment> AddNewComment(Comment newComment)
+        {
+            var result = await _dbContext.Comments.AddAsync(newComment);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
+        }
+
+        public async Task<Comment> UpdateComment(Comment updateComment) // Change to DTO
+        {
+            var result = _dbContext.Comments.Update(updateComment);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
+        }
+
+        public async Task<Comment> DeleteComment(Comment deleteComment)// Change to DTO
+        {
+            var result = _dbContext.Comments.Remove(deleteComment);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity;
+        }
     }
 }

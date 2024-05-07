@@ -4,9 +4,7 @@ using FakeSocialAPI.Exception;
 using FakeSocialAPI.IRepositories;
 using FakeSocialAPI.Repositories;
 using FluentValidation.AspNetCore;
-using FakeSocialAPI.Models;
 using FakeSocialAPI.Validators;
-using System.Reflection;
 using FluentValidation;
 
 
@@ -29,6 +27,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ILikeRepository, LikeRepository>();
 
 var app = builder.Build();
 

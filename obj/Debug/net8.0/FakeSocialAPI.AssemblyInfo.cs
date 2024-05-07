@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FakeSocialAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f0ed54c2459a327b97917871782817ddec54cf2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a63a0f7b5fbbaf9eee567567ff8996997d9cc910")]
 [assembly: System.Reflection.AssemblyProductAttribute("FakeSocialAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FakeSocialAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
